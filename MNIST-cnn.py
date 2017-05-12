@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torchvision.datasets as dataset 
-import torchvision.transforms as tranforms
+import torchvision.transforms as transforms
 from torch.autograd import Variable
 
 # Parameters
@@ -10,14 +10,14 @@ n_epoch = 5
 learning_rate = 1e-3
 batch_size = 100
 
-train_dataset = dataset.MNIST(root = '../data/ ', 
+train_dataset = dataset.MNIST(root = '../data/mnist', 
 						train=True , 
-						transform=transform.ToTensor() , 
+						transform=transforms.ToTensor(), 
 						download=True)
 
-test_dataset = dataset.MNIST(root='../data/',
+test_dataset = dataset.MNIST(root='../data/mnist',
 						train=False,
-						transform = tranforms.ToTensor())
+						transform = transforms.ToTensor())
 
 # Loading Data
 
@@ -43,7 +43,7 @@ class CNN(nn.Module):
 					nn.Conv2d(16 , 32, kernel_size=5 , padding=2),
 					nn.BatchNorm2d(32),
 					nn.ReLU(),
-					nn.MaxPool2d(2);
+					nn.MaxPool2d(2)
 					)
 		self.fc = nn.Linear(7*7*32 , 10)
 
