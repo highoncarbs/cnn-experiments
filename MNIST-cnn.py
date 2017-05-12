@@ -12,7 +12,7 @@ batch_size = 100
 
 train_dataset = dataset.MNIST(root = '../data/mnist', 
 						train=True , 
-						transform=transforms.ToTensor(), 
+						transform=transforms.ToTensor() , 
 						download=True)
 
 test_dataset = dataset.MNIST(root='../data/mnist',
@@ -52,6 +52,7 @@ class CNN(nn.Module):
 		out = self.layer2(out)
 		out = out.view(out.size(0) , -1)
 		out = self.fc(out)
+		return out
 
 cnn = CNN()
 
@@ -95,3 +96,41 @@ for images, labels in test_loader:
 print(' Accuracy on 10k test images : %d %%' % (100*correct/total))
 
 torch.save(cnn.state_dict() , 'cnn.pkl')		
+
+'''
+Output
+
+Epoch [15] , iter [100600] Loss: 0.2221
+Epoch [15] , iter [200600] Loss: 0.0690
+Epoch [15] , iter [300600] Loss: 0.0889
+Epoch [15] , iter [400600] Loss: 0.0245
+Epoch [15] , iter [500600] Loss: 0.0795
+Epoch [15] , iter [600600] Loss: 0.0713
+Epoch [25] , iter [100600] Loss: 0.1015
+Epoch [25] , iter [200600] Loss: 0.0209
+Epoch [25] , iter [300600] Loss: 0.0882
+Epoch [25] , iter [400600] Loss: 0.0117
+Epoch [25] , iter [500600] Loss: 0.0419
+Epoch [25] , iter [600600] Loss: 0.0262
+Epoch [35] , iter [100600] Loss: 0.1080
+Epoch [35] , iter [200600] Loss: 0.0663
+Epoch [35] , iter [300600] Loss: 0.0538
+Epoch [35] , iter [400600] Loss: 0.1063
+Epoch [35] , iter [500600] Loss: 0.0250
+Epoch [35] , iter [600600] Loss: 0.0112
+Epoch [45] , iter [100600] Loss: 0.0476
+Epoch [45] , iter [200600] Loss: 0.0493
+Epoch [45] , iter [300600] Loss: 0.0659
+Epoch [45] , iter [400600] Loss: 0.0148
+Epoch [45] , iter [500600] Loss: 0.0086
+Epoch [45] , iter [600600] Loss: 0.0125
+Epoch [55] , iter [100600] Loss: 0.0086
+Epoch [55] , iter [200600] Loss: 0.0220
+Epoch [55] , iter [300600] Loss: 0.0461
+Epoch [55] , iter [400600] Loss: 0.0039
+Epoch [55] , iter [500600] Loss: 0.0331
+Epoch [55] , iter [600600] Loss: 0.0238
+Accuracy on 10k test images : 99 %
+
+
+'''
